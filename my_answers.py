@@ -32,8 +32,25 @@ def build_part1_RNN(window_size):
 
 ### TODO: return the text input with only ascii lowercase and the punctuation given below included.
 def cleaned_text(text):
+    # print(sorted(set(text)))
+    '''
+    Sorted unique characters
+    [' ', '!', '"', '$', '%', '&', "'", '(', ')', '*', ',', '-', '.', 
+    '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', 
+    '?', '@', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 
+    'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
+    'y', 'z', 'à', 'â', 'è', 'é']
+    '''
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 
+    'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
+    'y', 'z']
     punctuation = ['!', ',', '.', ':', ';', '?']
 
+    keep = numbers + alphabet + punctuation
+    remove = set(text).difference(set(keep))
+    for idx, c in enumerate(list(remove)):
+        text = text.replace(c,' ')
     return text
 
 ### TODO: fill out the function below that transforms the input text and window-size into a set of input/output pairs for use with our RNN model
