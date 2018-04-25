@@ -41,13 +41,12 @@ def cleaned_text(text):
     'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
     'y', 'z', 'à', 'â', 'è', 'é']
     '''
-    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 
     'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
     'y', 'z']
     punctuation = ['!', ',', '.', ':', ';', '?']
 
-    keep = numbers + alphabet + punctuation
+    keep =  alphabet + punctuation
     remove = set(text).difference(set(keep))
     for idx, c in enumerate(list(remove)):
         text = text.replace(c,' ')
@@ -65,4 +64,8 @@ def window_transform_text(text, window_size, step_size):
 # TODO build the required RNN model: 
 # a single LSTM hidden layer with softmax activation, categorical_crossentropy loss 
 def build_part2_RNN(window_size, num_chars):
-    pass
+    model = Sequential()
+    model.add(LSTM(200, input_shape=(window_size, num_chars)))
+    model.add(Dense(num_chars, activation='relu'))
+    model.add(Dense(num_chars, activation='softmax'))
+    return model
